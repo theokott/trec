@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load staticfiles %}
 <html>
 <head lang="en">
     <meta charset="UTF-8">
@@ -8,5 +9,9 @@
     <h1>This is a standard HTML page</h1>
     Except for the fact it uses Django template variables such as:
     {{ exampleDjangoVariable }}
+    <br />
+    and
+    <br />
+    <img src="{% static "images/logo.jpg" %}" alt="TREC Evaluator logo" />
 </body>
 </html>
