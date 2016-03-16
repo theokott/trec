@@ -29,7 +29,7 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User)
     university = models.CharField(max_length=128)
     description = models.CharField(max_length=1024)
-    ##dateOfRegistration = models.DateField
+    dateOfRegistration = models.DateField()
 
 
 class Task(models.Model):
@@ -63,10 +63,11 @@ class Run(models.Model):
 
     runID = models.CharField(max_length=128, unique=True)
     name = models.CharField(max_length=128, unique=False)
-    ##dateSubmitted = models.DateField
+    dateSubmitted = models.DateField()
     task = models.ForeignKey(Task)
     description = models.CharField(max_length=1024)
     isFullyAutomated = models.BooleanField()
+    isFullyAutomated.default = False
     queryType = models.CharField(max_length=1, choices=queryTypeChoices, default=test)
 
     def __unicode__(self):
