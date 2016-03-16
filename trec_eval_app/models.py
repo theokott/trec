@@ -25,6 +25,8 @@ class UserProfile(models.Model):
 
 #One to one relationship with existing model User
 #User already contains first name, last name, email, password and username fields
+#Make sure that when you interact with a user you use both the User and UserProfile unless you're only
+#interested in the fields from one. This means we'll need two form for registration and such
 
     user = models.OneToOneField(User)
     university = models.CharField(max_length=128)
