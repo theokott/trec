@@ -45,9 +45,6 @@ class Task(models.Model):
     ##dateCreated = models.DateField
     track = models.ForeignKey(Track)
 
-    def __unicode__(self):
-        return self.name
-
 
 class Run(models.Model):
 
@@ -66,6 +63,7 @@ class Run(models.Model):
     runID = models.CharField(max_length=128, unique=True)
     name = models.CharField(max_length=128, unique=False)
     dateSubmitted = models.DateField()
+    dateSubmitted.null = True
     task = models.ForeignKey(Task)
     description = models.CharField(max_length=1024)
     isFullyAutomated = models.BooleanField()
