@@ -28,10 +28,13 @@ class UserProfile(models.Model):
 #Make sure that when you interact with a user you use both the User and UserProfile unless you're only
 #interested in the fields from one. This means we'll need two form for registration and such
 
+##   Is date needed when Django already tracks this?
+
     user = models.OneToOneField(User)
     university = models.CharField(max_length=128)
     description = models.CharField(max_length=1024)
-    dateOfRegistration = models.DateField()
+    #dateOfRegistration = models.DateField()
+    #dateOfRegistration.null = True
 
 
 class Task(models.Model):
@@ -39,10 +42,11 @@ class Task(models.Model):
 ##NEED TO ADD:
 ##   Judgement path?
 ##   Path?
+##   Is date needed when Django already tracks this?
 
     taskID = models.CharField(max_length=128, unique=True)
     description = models.CharField(max_length=1024)
-    ##dateCreated = models.DateField
+    #dateCreated = models.DateField
     track = models.ForeignKey(Track)
 
 
@@ -59,11 +63,12 @@ class Run(models.Model):
 ##   Feedback type
 ##   Results
 ##   Path?
+##   Is date needed when Django already tracks this?
 
     runID = models.CharField(max_length=128, unique=True)
     name = models.CharField(max_length=128, unique=False)
-    dateSubmitted = models.DateField()
-    dateSubmitted.null = True
+    #dateSubmitted = models.DateField()
+    #dateSubmitted.null = True
     task = models.ForeignKey(Task)
     description = models.CharField(max_length=1024)
     isFullyAutomated = models.BooleanField()
