@@ -9,12 +9,19 @@
     <h1>This is a standard HTML page</h1>
     Except for the fact it uses Django template variables such as:
     {{ exampleDjangoVariable }}
+
+    {{ user.username }}
     <br />
     and
     <br />
     <img src="{% static "images/logo.jpg" %}" alt="TREC Evaluator logo" />
     <br>
-    <a href="login">Login or register</a>
+    {% if user.is_authenticated %}
+        <a href="/trec_eval_app/logout/">Logout</a><br />
+    {% else %}
+        <a href="/trec_eval_app/register/">Register Here</a><br />
+        <a href="/trec_eval_app/login/">Login</a><br />
+    {% endif %}
     <br>
     <a href="scoreboard">Scoreboard</a>
 </body>

@@ -7,7 +7,8 @@ from trec_eval_app import views
 
 urlpatterns = patterns('',
         url(r'^$', views.index, name='index'),
-        url(r'scoreboard$', views.scoreboard, name='scoreboard'),
-        url(r'login$', views.login, name='scoreboard'),
+        url(r'scoreboard/$', views.scoreboard, name='scoreboard'),
+        url(r'login/$', views.login, name='scoreboard'),
+        url(r'logout/$', views.login, name='scoreboard'),
         url(r'register/$', views.register, name='register'),
         )

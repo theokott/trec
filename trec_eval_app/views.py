@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.contrib.auth import authenticate, login
+from django.http import HttpResponseRedirect, HttpResponse
 from trec_eval_app.forms import UserForm, UserProfileForm
 
 

@@ -6,9 +6,14 @@
 </head>
 <body>
     <h1>SCOREBOARD</h1>
-    <a href="login">Login or register</a>
+    {% if user.is_authenticated %}
+        <a href="/trec_eval_app/logout/">Logout</a><br />
+    {% else %}
+        <a href="/trec_eval_app/register/">Register Here</a><br />
+        <a href="/trec_eval_app/login/">Login</a><br />
+    {% endif %}
     <br>
-    <a href=http://127.0.0.1:8000/trec_eval_app/>Index</a>
+    <a href=/trec_eval_app/>Index</a>
 
 </body>
 </html>
