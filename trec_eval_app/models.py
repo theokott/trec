@@ -52,12 +52,32 @@ class Task(models.Model):
 
 class Run(models.Model):
 
-    test = "a"
-    test2 = "b"
+    qtTitle = "t"
+    qtTitleAndDesc = "td"
+    qtDesc = "d"
+    qtAll = "a"
+    qtOther = "o"
     queryTypeChoices = (
-        (test, "example 1"),
-        (test2, "example 2"),
+        (qtTitle, "Title"),
+        (qtTitleAndDesc, "Title and Description"),
+        (qtDesc, "Description"),
+        (qtAll, "All"),
+        (qtOther, "Other"),
     )
+
+    feedTypeN = "n"
+    feedTypeP = "p"
+    feedTypeR = "r"
+    feedTypeO = "o"
+    feedbackTypeChoices = (
+        (feedTypeN, "None"),
+        (feedTypeP, "Pseudo"),
+        (feedTypeR, "Relevance"),
+        (feedTypeO, "Other"),
+    )
+
+
+
 
 ##NEED TO ADD:
 ##   Feedback type
@@ -73,7 +93,8 @@ class Run(models.Model):
     description = models.CharField(max_length=1024)
     isFullyAutomated = models.BooleanField()
     isFullyAutomated.default = False
-    queryType = models.CharField(max_length=1, choices=queryTypeChoices, default=test)
+    queryType = models.CharField(max_length=2, choices=queryTypeChoices, default=qtTitle)
+    feedbackType = models.CharField(max_length=1, choices=feedbackTypeChoices, default=feedTypeN)
 
     def __unicode__(self):
         return self.name

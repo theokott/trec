@@ -2,7 +2,8 @@ from django.shortcuts import render
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponseRedirect, HttpResponse
 from trec_eval_app.forms import UserForm, UserProfileForm
-
+from django.contrib.auth import logout
+from django.contrib.auth.decorators import login_required
 
 #Creates html responses based the function called
 #Each function contains a context_dict which contains variables to be used in the HTML template that is referenced
@@ -17,9 +18,28 @@ def scoreboard(request):
 
     return render(request, 'trec_eval_app/scoreboard.html', context_dict)
 
-def login(request):
+def userLogin(request):
     context_dict = {}
-    return render(request, 'trec_eval_app/login.html', context_dict)
+
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        user = authenticate(username=username, password=password)
+
+        if user:
+            if user.is_active:
+                login(request, user)
+                return HttpResponseRedirect('/trec_eval_app/')
+            else:
+                return HttpResponse("Your TREC Eval account is disabled.")
+        else:
+            # Bad login details were provided. So we can't log the user in.
+            print "Invalid login details: {0}, {1}".format(username, password)
+            return HttpResponse("Invalid login details supplied.")
+
+    else:
+        return render(request, 'trec_eval_app/login.html', context_dict)
 
 def register(request):
         context_dict = {}
@@ -62,3 +82,8 @@ def register(request):
 def upload(request):
     context_dict = {}
     return render(request, 'trec_eval_app/upload.html', context_dict)
+
+@login_required
+def user_logout(request):
+    logout(request)
+    return HttpResponseRedirect('/trec_eval_app/')

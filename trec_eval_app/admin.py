@@ -1,5 +1,6 @@
 from django.contrib import admin
 from trec_eval_app.models import *
+from trec_eval_app.models import UserProfile
 
 # Register your models here.
 
