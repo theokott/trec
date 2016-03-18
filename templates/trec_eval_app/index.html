@@ -5,10 +5,16 @@
 {% block title %} Home {% endblock %}
 
 {% block body_block %}
-    <img src="{% static "images/logo.jpg" %}" alt="TREC Evaluator logo" />
+    <div class="page-header">
+        <h1><h1>Welcome {{ user.username }}!</h1></h1>
+    </div>
     {% if user.is_authenticated %}
-        <h1>Welcome {{ user.username }}!</h1>
         <a href="{% url 'upload' %}">Upload</a>
     {% endif %}
+
+    Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
+
+
+
 {% endblock %}
 
