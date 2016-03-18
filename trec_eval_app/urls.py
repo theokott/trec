@@ -11,4 +11,5 @@ urlpatterns = patterns('',
         url(r'login/$', views.login, name='login'),
         url(r'logout/$', views.login, name='logout'),
         url(r'register/$', views.register, name='register'),
+        url(r'upload/$', views.upload, name='upload'),
         )

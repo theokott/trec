@@ -2,12 +2,13 @@
 
 {% load staticfiles %}
 
-{% block title %} Index {% endblock %}
+{% block title %} Home {% endblock %}
 
 {% block body_block %}
     <img src="{% static "images/logo.jpg" %}" alt="TREC Evaluator logo" />
     {% if user.is_authenticated %}
         <h1>Welcome {{ user.username }}!</h1>
+        <a href="{% url 'upload' %}">Upload</a>
     {% endif %}
 {% endblock %}
 

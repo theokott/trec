@@ -58,3 +58,7 @@ def register(request):
     return render(request,
             'trec_eval_app/register.html',
             {'user_form': user_form, 'profile_form': profile_form, 'registered': registered} )
+
+def upload(request):
+    context_dict = {}
+    return render(request, 'trec_eval_app/upload.html', context_dict)
