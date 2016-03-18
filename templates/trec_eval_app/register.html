@@ -1,17 +1,20 @@
-<html>
-    <head>
-        <title>Registration</title>
-    </head>
+{% extends 'base.html' %}
 
-    <body>
+{% load staticfiles %}
+
+{% block title %} Register {% endblock %}
+
+
+{% block body_block %}
+        <img src="{% static "images/logo.jpg" %}" alt="TREC Evaluator logo" />
         <h1>Register with TREC Eval</h1>
 
         {% if registered %}
-        <strong>Thank you for registering!</strong>
-        <a href="/trec_eval_app/">Return to the homepage.</a><br />
+            <strong>Thank you for registering!</strong>
+            <a href="/trec_eval_app/">Return to the homepage.</a><br />
         {% else %}
-        <strong>Register here!</strong><br />
-
+            <strong>Register here!</strong><br />
+        {% endif %}
         <form id="user_form" method="post" action="/trec_eval_app/register/"
                 enctype="multipart/form-data">
 
@@ -26,6 +29,4 @@
             <!-- Provide a button to click to submit the form. -->
             <input type="submit" name="submit" value="Register" />
         </form>
-        {% endif %}
-    </body>
-</html>
+{% endblock %}

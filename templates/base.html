@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>TREC Evaluator - {% block title %} TREC {% endblock %} </title>
+    </head>
+
+    <body>
+        <div>
+            {% block body_block %}{% endblock %}
+        </div>
+
+        <hr/>
+
+        <div>
+            <ul>
+
+                {% if user.is_authenticated %}
+                    <li><a href="">Profile</a></li>
+                    <li><a href="{% url 'logout' %}">Logout</a></li>
+                    <li><a href=""></a></li>
+                {% else %}
+                    <li><a href="{% url 'register' %}">Register Here</a></li>
+                    <li><a href="/trec_eval_app/login/">Login</a></li>
+                {% endif %}
+
+                <a href="scoreboard">Scoreboard</a>
+
+            </ul>
+        </div>
+
+    </body>
+</html>
