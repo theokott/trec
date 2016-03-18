@@ -33,6 +33,8 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User)
     university = models.CharField(max_length=128)
     description = models.CharField(max_length=1024)
+    adminPermission = models.BooleanField()
+    adminPermission.default = False
     #dateOfRegistration = models.DateField()
     #dateOfRegistration.null = True
 
