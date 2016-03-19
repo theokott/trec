@@ -107,3 +107,8 @@ def user_logout(request):
 def user_profile(request):
     context_dict = {'request': request}
     return render(request, 'trec_eval_app/user.html', context_dict)
+
+
+def user_edit(request):
+    context_dict = {'request': request}
+    return render(request, 'trec_eval_app/user/edit.html', context_dict)
