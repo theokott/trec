@@ -52,7 +52,7 @@ def add_task(id, desc, track):
     return x
 
 def add_run(id, name, task, desc, date, automated, qType, fbType):
-    x = Run.objects.get_or_create(runID = id, task = task)[0]
+    x = Run.objects.get_or_create(runID = id, task = task, track_id = task.track.trackID)[0]
     x.description = desc
     x.name = name
     x.date = date

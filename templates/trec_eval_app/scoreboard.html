@@ -7,49 +7,52 @@
 {% block body_block %}
 
     <div class="page-header">
-        <h1>Scoreboard</h1>
+        <h1>Scoreboard {% if this_track %} for {{this_track}} {%endif%}</h1>
+    </div>
+    <div class="dropdown">
+        <button class="btn btn-default dropdown-toggle btn-xs" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        Which Track
+            </button>
+        <ul class="dropdown-menu">
+            {% for track in tracks %}
+            <li><a href="/trec_eval_app/scoreboard/{{track.slug}}">{{track.name}}</a></li>
+            {% endfor %}
+        </ul>
     </div>
 
-    {% for track in tracks %}
-        {{track.name}}
 
-    {% endfor %}
-    <table id="myTable" class="tablesorter">
-<thead>
-<tr>
-    <th>Last Name</th>
-    <th>First Name</th>
-    <th>Email</th>
-    <th>Due</th>
-    <th>Web Site</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-    <td>Smith</td>
-    <td>John</td>
-    <td>jsmith@gmail.com</td>
-    <td>$50.00</td>
-    <td>http://www.jsmith.com</td>
-</tr>
-<tr>
-    <td>Bach</td>
-    <td>Frank</td>
-    <td>fbach@yahoo.com</td>
-    <td>$50.00</td>
-    <td>http://www.frank.com</td>
-</tr>
-</tbody>
-</table>
-    Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
+    <table id="scoreTable" class="pure-table">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Score      </th>
+            <th>Description</th>
 
-<script>
-    $(document).ready(function()
-    {
-        $("#myTable").tablesorter();
-    }
-);
+        </tr>
+        </thead>
+        <tbody>
+        {% for run in runs %}
+        <tr>
+            <td>{{run.name}}</td>
+             <td>{{run.feedbackType}}</td>
+             <td>{{run.description}}</td>
+        </tr>
+        {% endfor %}
 
-</script>
+        </tbody>
+    </table>
+
+    <script>
+        $(document).ready(function()
+        {
+            $("#scoreTable").tablesorter({
+        // sort on the first column and third column, order asc
+        sortList: [[1,1]]
+    }); ;
+
+        }
+    );
+
+    </script>
 {% endblock %}
 

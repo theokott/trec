@@ -5,7 +5,7 @@ from trec_eval_app.forms import UserForm, UserProfileForm
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 
-from trec_eval_app.models import Track
+from trec_eval_app.models import Track, Run
 
 # Creates html responses based the function called
 # Each function contains a context_dict which contains variables to be used in the HTML template that is referenced
@@ -17,10 +17,31 @@ def index(request):
     return render(request, 'trec_eval_app/index.html', context_dict)
 
 
-def scoreboard(request):
+def scoreboard(request,track_slug=-1):
     context_dict = {'request': request}
+
     all_tracks = Track.objects.all()
+    this_track = []
+
+
+    if track_slug == -1:
+        runs = Run.objects.all()
+    else:
+        for track in all_tracks:
+            if track.slug == track_slug:
+                this_track = track
+                break
+
+        runs = Run.objects.filter(track=this_track)
+
+
+
+
+
+
     context_dict['tracks']= all_tracks
+    context_dict['this_track'] = this_track
+    context_dict['runs'] = runs
 
 
     return render(request, 'trec_eval_app/scoreboard.html', context_dict)
