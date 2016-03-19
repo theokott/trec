@@ -111,4 +111,4 @@ def user_profile(request):
 
 def user_edit(request):
     context_dict = {'request': request}
-    return render(request, 'trec_eval_app/user/edit.html', context_dict)
+    return render(request, 'trec_eval_app/edit.html', context_dict)

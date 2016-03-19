@@ -19,27 +19,64 @@
             </div>
 
 
-            <div class=".col-md-4">
-                    First name: {{ user.first_name }}
-            </div>
+            <div class="col-md-9 personal-info">
 
-            <div class=".col-md-3">
-                    Last name: {{ user.last_name }}
-            </div>
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">First name:</label>
+                        <div class="col-lg-8">
+                            <input class="form-control" type="text" value="{{ user.first_name }}" disabled>
+                        </div>
+                    </div>
 
-            <div class=".col-md-3">
-                    First name: {{ user.first_name }}
-            </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">Last name:</label>
+                        <div class="col-lg-8">
+                            <input class="form-control" type="text" value="{{ user.last_name }}" disabled>
+                        </div>
+                    </div>
 
-            <div class=".col-md-3">
-                    First name: {{ user.first_name }}
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">Email:</label>
+                        <div class="col-lg-8">
+                            <input class="form-control" type="text" value="{{ user.email }}" disabled>
+                        </div>
+                    </div>
+
+                    <br>
+
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">University:</label>
+                        <div class="col-lg-8">
+                            <input class="form-control" type="text" value="need to put current uni here" disabled>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">Description:</label>
+                        <div class="col-lg-8">
+                            <textarea class="form-control" rows="3" id="id_description" name="description"
+                                      placeholder="need to put current description here" disabled></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-3 control-label"></label>
+                        <div class="col-md-8">
+                            <a class="btn btn-default" href="{% url 'edit' %}" role="button">Change</a>
+                        </div>
+                    </div>
+                </form>
             </div>
 
         </div>
     </div>
     <hr>
 
-    Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
+    Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris
+    condimentum nibh, ut fermentum massa justo sit amet risus.
+    <br>
+    Put link to scoreboard here
 
 
 

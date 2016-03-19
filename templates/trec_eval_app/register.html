@@ -21,7 +21,7 @@
                 <a href="/trec_eval_app/">Return to the homepage.</a><br />
             {% else %}
 
-                <form class="form-horizontal" role="form" method="post" action="/trec_eval_app/register/">
+                <form class="form-horizontal" role="form" method="post" action="{% url 'register' %}">
                     {% csrf_token %}
 
                     <div class="form-group">
