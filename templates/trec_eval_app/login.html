@@ -1,3 +1,4 @@
+<!-- NEED TO IMPLEMENT 'REMEMBER ME' FUNCTIONALITY -->
 {% extends 'base.html' %}
 
 {% load staticfiles %}
@@ -6,17 +7,52 @@
 
 
 {% block body_block %}
-    <link href="http://getbootstrap.com/examples/signin/signin.css" rel="stylesheet">
 
-    <form class="form-signin" role="form" method="post" action=".">
+    <div class="page-header">
+        <h1>Please login</h1>
+    </div>
+
+    <!-- if login error, show the error message -->
+    {% if login_error %}
+        <span class="label label-danger">{{ login_error }}</span>
+        <br>
+        <br>
+    {% endif %}
+
+    <form class="form-horizontal" role="form" method="post" action=".">
         {% csrf_token %}
 
-        <h2 class="form-signin-heading">Please login</h2>
-        <input class="form-control" placeholder="Username" id="id_username" maxlength="254" name="username" type="text"
-               required autofocus=""/>
-        <input type="password" class="form-control" placeholder="Password" id="id_password" name="password" required/>
+        <div class="form-group">
+            <label for="id_username" class="col-sm-2 control-label">Username</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="id_username" name="username"
+                       placeholder="Username" required>
+            </div>
+        </div>
 
-        <button class="btn btn-lg btn-primary btn-block" type="submit" value="Submit">Sign in</button>
+        <div class="form-group">
+            <label for="id_password" class="col-sm-2 control-label">Password</label>
+            <div class="col-sm-10">
+                <input type="password" class="form-control" id="id_password" name="password"
+                       placeholder="Password" required>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-1 col-sm-10">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox"> Remember me
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-1 col-sm-10">
+                <button type="submit" class="btn btn-default">Sign in</button>
+            </div>
+        </div>
     </form>
 
 {% endblock %}

@@ -5,21 +5,25 @@ from trec_eval_app.forms import UserForm, UserProfileForm
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 
-#Creates html responses based the function called
-#Each function contains a context_dict which contains variables to be used in the HTML template that is referenced
+# Creates html responses based the function called
+# Each function contains a context_dict which contains variables to be used in the HTML template that is referenced
+
 
 def index(request):
     context_dict = {'exampleDjangoVariable': "sdffgdgd!"}
 
     return render(request, 'trec_eval_app/index.html', context_dict)
 
+
 def scoreboard(request):
     context_dict = {}
 
     return render(request, 'trec_eval_app/scoreboard.html', context_dict)
 
-def userLogin(request):
+
+def user_login(request):
     context_dict = {}
+    context_dict['login_error'] = None  # Reset login error message
 
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -32,21 +36,25 @@ def userLogin(request):
                 login(request, user)
                 return HttpResponseRedirect('/trec_eval_app/')
             else:
-                return HttpResponse("Your TREC Eval account is disabled.")
+                # These next two lines are for showing a red error message if user cant login in
+                # Redirects them back to the login page with custom error message
+                context_dict['login_error'] = 'Your TREC Eval account is disabled'
+                return render(request, 'trec_eval_app/login.html', context_dict)
         else:
             # Bad login details were provided. So we can't log the user in.
             print "Invalid login details: {0}, {1}".format(username, password)
-            return HttpResponse("Invalid login details supplied.")
 
+            # These next two lines are for showing a red error message if user cant login in
+            # Redirects them back to the login page with custom error message
+            context_dict['login_error'] = 'Invalid login details supplied'
+            return render(request, 'trec_eval_app/login.html', context_dict)
     else:
         return render(request, 'trec_eval_app/login.html', context_dict)
 
-def register(request):
-        context_dict = {}
-        return render(request, 'trec_eval_app/register.html', context_dict)
 
 def register(request):
 
+    context_dict = {}
     registered = False
 
     if request.method == 'POST':
@@ -79,9 +87,11 @@ def register(request):
             'trec_eval_app/register.html',
             {'user_form': user_form, 'profile_form': profile_form, 'registered': registered} )
 
+
 def upload(request):
     context_dict = {}
     return render(request, 'trec_eval_app/upload.html', context_dict)
+
 
 @login_required
 def user_logout(request):

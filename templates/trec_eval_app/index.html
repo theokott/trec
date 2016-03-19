@@ -6,12 +6,12 @@
 
 {% block body_block %}
     <div class="page-header">
-        <h1><h1>Welcome {{ user.username }}!</h1></h1>
+        <h1>Welcome {{ user.username }}!</h1>
     </div>
     {% if user.is_authenticated %}
-        <a href="{% url 'upload' %}">Upload</a>
+        <h3><a href="{% url 'upload' %}">Upload</a></h3>
     {% endif %}
-
+    <br>
     Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
 
 

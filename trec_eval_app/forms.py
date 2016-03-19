@@ -1,7 +1,5 @@
-import time
-
 __author__ = '2131905K'
-
+import time
 from django import forms
 from django.contrib.auth.models import User
 from trec_eval_app.models import Track, Task, Run, UserProfile
@@ -13,6 +11,7 @@ class UserForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ("username", "email", "password")
+
 
 class UserProfileForm(forms.ModelForm):
     class Meta:
