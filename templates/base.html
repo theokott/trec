@@ -107,6 +107,7 @@
     <!--[if lt IE 9]><script src="http://getbootstrap.comassets/js/ie8-responsive-file-warning.js"></script><![endif]
     <script src="http://getbootstrap.com/assets/js/ie-emulation-modes-warning.js"></script>-->
 
+    <script src="js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <script>
         $('ul li').click( function() {
@@ -130,10 +131,11 @@
                 <li role="presentation" class="active"><a href="{% url 'index' %}">Home</a></li>
                 <li role="presentation"><a href="{% url 'scoreboard' %}">Scoreboard</a></li>
                 {% if user.is_authenticated %}
+                    <li><a href="{% url 'user' %}">{{ user.username }}</a></li>
                     <li><a href="{% url 'logout' %}">Logout</a></li>
 
                 {% else %}
-                    <li><a href="{% url 'register' %}">Register Here</a></li>
+                    <li><a href="{% url 'register' %}">Register</a></li>
                     <li><a href="{% url 'login' %}">Login</a></li>
                 {% endif %}
             </ul>

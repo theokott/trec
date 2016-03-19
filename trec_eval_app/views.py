@@ -97,3 +97,8 @@ def upload(request):
 def user_logout(request):
     logout(request)
     return HttpResponseRedirect('/trec_eval_app/')
+
+
+def user_profile(request):
+    context_dict = {}
+    return render(request, 'trec_eval_app/user.html', context_dict)

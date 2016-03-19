@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block title %} Home {% endblock %}
+
+{% block body_block %}
+    <div class="page-header">
+        <h1>User profile: {{ user.username }}</h1>
+    </div>
+
+    <div class="container">
+        <hr>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="text-center">
+                    <img src="//placehold.it/100" class="avatar img-circle" alt="avatar">
+                </div>
+            </div>
+
+
+            <div class=".col-md-4">
+                    First name: {{ user.first_name }}
+            </div>
+
+            <div class=".col-md-3">
+                    Last name: {{ user.last_name }}
+            </div>
+
+            <div class=".col-md-3">
+                    First name: {{ user.first_name }}
+            </div>
+
+            <div class=".col-md-3">
+                    First name: {{ user.first_name }}
+            </div>
+
+        </div>
+    </div>
+    <hr>
+
+    Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
+
+
+
+{% endblock %}
+
