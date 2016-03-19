@@ -43,7 +43,7 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User)
     university = models.CharField(max_length=128)
     description = models.CharField(max_length=1024)
-    picture = models.ImageField(upload_to='profile_images', blank=True, default='default.png')
+    picture = models.ImageField(upload_to='profile_images', blank=True, default='profile_images/default.png')
     adminPermission = models.BooleanField()
     adminPermission.default = False
     #dateOfRegistration = models.DateField()

@@ -17,12 +17,11 @@ def index(request):
     return render(request, 'trec_eval_app/index.html', context_dict)
 
 
-def scoreboard(request,track_slug=-1):
+def scoreboard(request, track_slug=-1):
     context_dict = {'request': request}
 
     all_tracks = Track.objects.all()
     this_track = []
-
 
     if track_slug == -1:
         runs = Run.objects.all()
@@ -34,15 +33,9 @@ def scoreboard(request,track_slug=-1):
 
         runs = Run.objects.filter(track=this_track)
 
-
-
-
-
-
-    context_dict['tracks']= all_tracks
+    context_dict['tracks'] = all_tracks
     context_dict['this_track'] = this_track
     context_dict['runs'] = runs
-
 
     return render(request, 'trec_eval_app/scoreboard.html', context_dict)
 
@@ -79,7 +72,6 @@ def user_login(request):
 
 
 def register(request):
-
     context_dict = {}
     registered = False
 
@@ -95,8 +87,11 @@ def register(request):
 
             profile = profile_form.save(commit=False)
             profile.user = user
-            profile.save()
 
+            if 'picture' in request.FILES:
+                profile.picture = request.FILES['picture']
+
+            profile.save()
             registered = True
 
         else:
@@ -109,9 +104,8 @@ def register(request):
         profile_form = UserProfileForm()
 
     # Render the template depending on the context.
-    return render(request,
-            'trec_eval_app/register.html',
-            {'user_form': user_form, 'profile_form': profile_form, 'registered': registered, 'request': request} )
+    return render(request, 'trec_eval_app/register.html', {'user_form': user_form, 'profile_form': profile_form,
+                  'registered': registered, 'request': request} )
 
 
 def upload(request):
@@ -127,9 +121,15 @@ def user_logout(request):
 
 def user_profile(request):
     context_dict = {'request': request}
+    # profile = request.user.UserProfile()
+    # context_dict['university'] = profile.university
+    # context_dict['description'] = profile.description
+    # context_dict['picture'] = profile.picture
     return render(request, 'trec_eval_app/user.html', context_dict)
 
 
 def user_edit(request):
     context_dict = {'request': request}
     return render(request, 'trec_eval_app/edit.html', context_dict)
+
+

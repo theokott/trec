@@ -1,5 +1,17 @@
 <!-- CAN REGISTER BUT NEED TO IMPLEMENT ERROR HANDLING
-     NEED TO ALSO FACILITATE PROFILE PICTURE UPLOADING -->
+
+     { for field in user_form.visible_fields %}
+        <div class="form-group">
+            <label for="{ field.auto_id }}" class="col-sm-2 control-label">{ field.label }}</label>
+            <div class="col-sm-10">
+                <input type="" class="form-control" placeholder="{ field.label }}"
+                name="{ field.html_name }}" id="{ field.auto_id }}" required>
+            </div>
+        </div>
+     { endfor %}
+
+     Can also automate form but need to modify above code to make it work (currently doesnt work)
+     -->
 {% extends 'base.html' %}
 
 {% load staticfiles %}
@@ -23,7 +35,6 @@
 
                 <form class="form-horizontal" role="form" method="post" action="{% url 'register' %}">
                     {% csrf_token %}
-
                     <div class="form-group">
                         <label for="id_first_name" class="col-sm-2 control-label">First name</label>
                         <div class="col-sm-10">
@@ -81,10 +92,18 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="id_picture" class="col-sm-2 control-label">Profile picture (optional)</label>
+                        <div class="col-sm-10">
+                            <input type="file" id="id_picture" name="picture">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
                         <div class="col-sm-offset-1 col-sm-10">
                             <button type="submit" class="btn btn-default">Register</button>
                         </div>
                     </div>
+
                 </form>
 
             {% endif %}
