@@ -8,4 +8,5 @@ urlpatterns = patterns('',
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^trec_eval_app/', include('trec_eval_app.urls')),     #Takes urls starting with /trec_eval_app/..., strips /trec_eval_app/ and passes the rest to trec_eval_app.urls be matched
+    url(r'^$', include('trec_eval_app.urls'))
 )

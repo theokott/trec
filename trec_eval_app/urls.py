@@ -13,9 +13,9 @@ urlpatterns = patterns('',
         url(r'register/$', views.register, name='register'),
         url(r'upload/$', views.upload, name='upload'),
         url(r'user/$', views.user_profile, name='user'),
-<<<<<<< Updated upstream
+# Updated upstream
         url(r'user/edit/$', views.user_edit, name='edit'),
-=======
+#=======
         url(r'^scoreboard/(?P<track_slug>[\w\-]+)/$', views.scoreboard, name='scoreboard'),
->>>>>>> Stashed changes
+# Stashed changes
         )
