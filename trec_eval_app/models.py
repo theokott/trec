@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.template.defaultfilters import slugify
 
 # Create your models here.
 
@@ -16,6 +17,15 @@ class Track(models.Model):
     trackID = models.CharField(max_length=128, unique=True)
     name = models.CharField(max_length=128, unique=False)
     description = models.CharField(max_length=1024)
+
+    slug = models.SlugField()
+
+    def save(self, *args, **kwargs):
+        # Uncomment if you don't want the slug to change every time the name changes
+        #if self.id is None:
+                #self.slug = slugify(self.name)
+        self.slug = slugify(self.name)
+        super(Track, self).save(*args, **kwargs)
 
     def __unicode__(self):
         return self.name
@@ -88,6 +98,8 @@ class Run(models.Model):
 ##   Is date needed when Django already tracks this?
 
     runID = models.CharField(max_length=128, unique=True)
+    track = models.ForeignKey(Track)
+
     name = models.CharField(max_length=128, unique=False)
     #dateSubmitted = models.DateField()
     #dateSubmitted.null = True
@@ -104,3 +116,9 @@ class Run(models.Model):
 
 
 
+class RunScore(models.Model):
+    run = models.OneToOneField(Run)
+    score = models.IntegerField(default=0)
+
+    def __unicode__(self):
+        return "Score for run '{}'".format(run.name)
