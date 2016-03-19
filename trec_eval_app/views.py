@@ -5,24 +5,29 @@ from trec_eval_app.forms import UserForm, UserProfileForm
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 
+from trec_eval_app.models import Track
+
 # Creates html responses based the function called
 # Each function contains a context_dict which contains variables to be used in the HTML template that is referenced
 
 
 def index(request):
-    context_dict = {'exampleDjangoVariable': "sdffgdgd!"}
+    context_dict = {'request': request}
 
     return render(request, 'trec_eval_app/index.html', context_dict)
 
 
 def scoreboard(request):
-    context_dict = {}
+    context_dict = {'request': request}
+    all_tracks = Track.objects.all()
+    context_dict['tracks']= all_tracks
+
 
     return render(request, 'trec_eval_app/scoreboard.html', context_dict)
 
 
 def user_login(request):
-    context_dict = {}
+    context_dict = {'request': request}
     context_dict['login_error'] = None  # Reset login error message
 
     if request.method == 'POST':
@@ -85,11 +90,11 @@ def register(request):
     # Render the template depending on the context.
     return render(request,
             'trec_eval_app/register.html',
-            {'user_form': user_form, 'profile_form': profile_form, 'registered': registered} )
+            {'user_form': user_form, 'profile_form': profile_form, 'registered': registered, 'request': request} )
 
 
 def upload(request):
-    context_dict = {}
+    context_dict = {'request': request}
     return render(request, 'trec_eval_app/upload.html', context_dict)
 
 
@@ -100,5 +105,5 @@ def user_logout(request):
 
 
 def user_profile(request):
-    context_dict = {}
+    context_dict = {'request': request}
     return render(request, 'trec_eval_app/user.html', context_dict)

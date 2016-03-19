@@ -93,8 +93,7 @@ class Run(models.Model):
     #dateSubmitted.null = True
     task = models.ForeignKey(Task)
     description = models.CharField(max_length=1024)
-    isFullyAutomated = models.BooleanField()
-    isFullyAutomated.default = False
+    isFullyAutomated = models.BooleanField(default=False)
     queryType = models.CharField(max_length=2, choices=queryTypeChoices, default=qtTitle)
     feedbackType = models.CharField(max_length=1, choices=feedbackTypeChoices, default=feedTypeN)
 

@@ -10,8 +10,46 @@
         <h1>Scoreboard</h1>
     </div>
 
+    {% for track in tracks %}
+        {{track.name}}
+
+    {% endfor %}
+    <table id="myTable" class="tablesorter">
+<thead>
+<tr>
+    <th>Last Name</th>
+    <th>First Name</th>
+    <th>Email</th>
+    <th>Due</th>
+    <th>Web Site</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+    <td>Smith</td>
+    <td>John</td>
+    <td>jsmith@gmail.com</td>
+    <td>$50.00</td>
+    <td>http://www.jsmith.com</td>
+</tr>
+<tr>
+    <td>Bach</td>
+    <td>Frank</td>
+    <td>fbach@yahoo.com</td>
+    <td>$50.00</td>
+    <td>http://www.frank.com</td>
+</tr>
+</tbody>
+</table>
     Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
 
+<script>
+    $(document).ready(function()
+    {
+        $("#myTable").tablesorter();
+    }
+);
 
+</script>
 {% endblock %}
 
