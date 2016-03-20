@@ -2,7 +2,7 @@
 
 {% load staticfiles %}
 
-{% block title %} Home {% endblock %}
+{% block title %} {{ user.username }} {% endblock %}
 
 {% block body_block %}
     <div class="page-header">
@@ -14,7 +14,7 @@
         <div class="row">
             <div class="col-md-3">
                 <div class="text-center">
-                    <img src="{{ user.picture }}" class="avatar img-circle" alt="avatar">
+                    <img src="{{ picture }}" class="avatar img-circle" alt="avatar">
                 </div>
             </div>
 
@@ -48,7 +48,7 @@
                     <div class="form-group">
                         <label class="col-lg-3 control-label">University</label>
                         <div class="col-lg-8">
-                            <input class="form-control" type="text" value="need to put current uni here" disabled>
+                            <input class="form-control" type="text" value="{{ university }}" disabled>
                         </div>
                     </div>
 
@@ -56,7 +56,7 @@
                         <label class="col-lg-3 control-label">Description</label>
                         <div class="col-lg-8">
                             <textarea class="form-control" rows="3" id="id_description" name="description"
-                                      placeholder="need to put current description here" disabled></textarea>
+                                      placeholder="{{ description }}" disabled></textarea>
                         </div>
                     </div>
 

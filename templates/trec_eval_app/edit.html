@@ -2,7 +2,7 @@
 
 {% load staticfiles %}
 
-{% block title %} Home {% endblock %}
+{% block title %} {{ user.username }} - Edit {% endblock %}
 
 {% block body_block %}
     <div class="page-header">
@@ -15,7 +15,7 @@
             <!-- left column -->
             <div class="col-md-3">
                 <div class="text-center">
-                    <img src="//placehold.it/100" class="avatar img-circle" alt="avatar">
+                    <img src="{{ picture }}" class="avatar img-circle" alt="avatar">
                     <h6>Upload a different photo...</h6>
 
                     <input type="file" class="form-control">
@@ -52,7 +52,7 @@
                     <div class="form-group">
                         <label class="col-lg-3 control-label">University</label>
                         <div class="col-lg-8">
-                            <input class="form-control" type="text" value="need to put current uni here">
+                            <input class="form-control" type="text" value="{{ university }}">
                         </div>
                     </div>
 
@@ -60,21 +60,31 @@
                         <label class="col-lg-3 control-label">Description</label>
                         <div class="col-lg-8">
                             <textarea class="form-control" rows="3" id="id_description" name="description"
-                                      placeholder="need to put current description here" required></textarea>
+                                      placeholder="{{ description }}" required></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Current password</label>
+                        <div class="col-md-8">
+                            <input class="form-control" type="password" id="id_current_password"
+                                   name="current_password" required>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label class="col-md-3 control-label">Password</label>
                         <div class="col-md-8">
-                            <input class="form-control" type="password" value="">
+                            <input class="form-control" type="password" id="id_password"
+                                   name="password" required>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label class="col-md-3 control-label">Confirm password</label>
                         <div class="col-md-8">
-                            <input class="form-control" type="password" value="">
+                            <input class="form-control" type="password" id="id_password_2"
+                                   name="password_2" required>
                         </div>
                     </div>
 
@@ -98,7 +108,6 @@
     <hr>
 
     Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
-
 
 
 {% endblock %}

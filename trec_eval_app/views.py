@@ -1,10 +1,8 @@
 from django.shortcuts import render
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse
 from trec_eval_app.forms import UserForm, UserProfileForm
-from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
-
 from trec_eval_app.models import Track, Run
 
 # Creates html responses based the function called
@@ -102,10 +100,13 @@ def register(request):
     else:
         user_form = UserForm()
         profile_form = UserProfileForm()
+        context_dict['user_form'] = user_form
+        context_dict['profile_form'] = profile_form
 
-    # Render the template depending on the context.
-    return render(request, 'trec_eval_app/register.html', {'user_form': user_form, 'profile_form': profile_form,
-                  'registered': registered, 'request': request} )
+    context_dict['registered'] = registered
+    context_dict['request'] = request
+
+    return render(request, 'trec_eval_app/register.html', context_dict)
 
 
 def upload(request):
@@ -121,15 +122,32 @@ def user_logout(request):
 
 def user_profile(request):
     context_dict = {'request': request}
-    # profile = request.user.UserProfile()
-    # context_dict['university'] = profile.university
-    # context_dict['description'] = profile.description
-    # context_dict['picture'] = profile.picture
+    user = request.user
+    profile = user.userprofile
+    context_dict['university'] = profile.university
+    context_dict['description'] = profile.description
+    context_dict['picture'] = profile.picture
     return render(request, 'trec_eval_app/user.html', context_dict)
 
 
 def user_edit(request):
     context_dict = {'request': request}
+    user = request.user
+    profile = user.userprofile
+
+    if request.method == 'POST':
+        user_form = UserForm(request.POST, instance=user)
+        profile_form = UserProfileForm(request.POST, instance=profile)
+
+        if all([user_form.is_valid(), profile_form.is_valid()]):
+            user_form.save()
+            profile_form.save()
+            return HttpResponseRedirect('.')
+    else:
+        context_dict['university'] = profile.university
+        context_dict['description'] = profile.description
+        context_dict['picture'] = profile.picture
+
     return render(request, 'trec_eval_app/edit.html', context_dict)
 
 
