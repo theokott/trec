@@ -15,4 +15,4 @@ settings.py
 ;;directories to ignore
 .idea/
 
-db.sqlite3
+
