@@ -132,6 +132,7 @@ def user_profile(request):
 
 def user_edit(request):
     context_dict = {'request': request}
+    context_dict['error_message'] = None
     user = request.user
     profile = user.userprofile
 
@@ -142,7 +143,7 @@ def user_edit(request):
         if all([user_form.is_valid(), profile_form.is_valid()]):
             user_form.save()
             profile_form.save()
-            return HttpResponseRedirect('.')
+            return render(request, 'trec_eval_app/user.html', context_dict)
     else:
         context_dict['university'] = profile.university
         context_dict['description'] = profile.description
