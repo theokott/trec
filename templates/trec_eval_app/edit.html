@@ -15,10 +15,11 @@
             <!-- left column -->
             <div class="col-md-3">
                 <div class="text-center">
-                    <img src="{{ picture }}" class="avatar img-circle" alt="avatar">
+                    <img src="{{ MEDIA_URL }}{{ picture }}" class="avatar img-circle" alt="avatar" width="200"
+                         height="auto">
                     <h6>Upload a different photo...</h6>
 
-                    <input type="file" class="form-control">
+                    <input type="file" id="id_picture" name="picture">
                 </div>
             </div>
 
