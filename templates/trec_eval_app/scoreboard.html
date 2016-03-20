@@ -11,8 +11,8 @@
     </div>
     <div class="dropdown">
         <button class="btn btn-default dropdown-toggle btn-xs" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-        Which Track
-            </button>
+        Select Track
+        </button>
         <ul class="dropdown-menu">
             {% for track in tracks %}
             <li><a href="/trec_eval_app/scoreboard/{{track.slug}}">{{track.name}}</a></li>
@@ -20,12 +20,16 @@
         </ul>
     </div>
 
+    <label class="checkbox-inline"><input type="checkbox" value="" id="button1">MAP</label>
+    <label class="checkbox-inline"><input type="checkbox" value="" id="button2">P10</label>
+    <label class="checkbox-inline"><input type="checkbox" value="" id="button3">P20</label>
+
 
     <table id="scoreTable" class="pure-table">
         <thead>
         <tr>
             <th>Name</th>
-            <th>Score      </th>
+            <th>Score </th>
             <th>Description</th>
 
         </tr>
@@ -34,8 +38,8 @@
         {% for run in runs %}
         <tr>
             <td>{{run.name}}</td>
-             <td>{{run.feedbackType}}</td>
-             <td>{{run.description}}</td>
+            <td>{{run.MAPScore}}</td>
+            <td>{{run.description}}</td>
         </tr>
         {% endfor %}
 
