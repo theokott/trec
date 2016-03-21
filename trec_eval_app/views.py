@@ -130,7 +130,6 @@ def user_profile(request):
     return render(request, 'trec_eval_app/user.html', context_dict)
 
 
-@login_required
 def user_edit_profile(request):
     context_dict = {'request': request}
     context_dict['error_message'] = None
@@ -142,20 +141,20 @@ def user_edit_profile(request):
         user_form = UserForm(request.POST, instance=user)
         profile_form = UserProfileForm(request.POST, instance=profile)
 
-        if all([user_form.is_valid(), profile_form.is_valid()]):
 
-            user.first_name = user_form.first_name
-            user.last_name = user_form.last_name
+        user.first_name = user_form.first_name
+        user.last_name = user_form.last_name
 
-            profile.description = profile_form.description
-            profile.university = profile_form.university
+        profile.description = profile_form.description
+        profile.university = profile_form.university
 
-            if 'picture' in request.FILES:
-                profile.picture = picture = request.FILES['picture']
+        if 'picture' in request.FILES:
+            profile.picture = picture = request.FILES['picture']
 
-            user.save()
-            profile.save()
-            update = True
+        user.save()
+        profile.save()
+        update = True
+
     else:
         context_dict['university'] = profile.university
         context_dict['description'] = profile.description

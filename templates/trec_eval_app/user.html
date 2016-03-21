@@ -5,87 +5,87 @@
 {% block title %} {{ user.username }} {% endblock %}
 
 {% block body_block %}
-    <div class="page-header">
-        <h1>User profile: {{ user.username }}</h1>
-    </div>
 
-    <div class="container">
-        <hr>
-        <div class="row">
-            <div class="col-md-3">
-                <div class="text-center">
-                    <img src="{{ MEDIA_URL }}{{ picture }}" class="avatar img-circle" alt="avatar" width="200"
-                         height="auto">
+    {% if user.is_authenticated %}
+
+        <div class="page-header">
+            <h1>User profile: {{ user.username }}</h1>
+        </div>
+
+        <div class="container">
+            <hr>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="text-center">
+                        <img src="{{ MEDIA_URL }}{{ picture }}" class="avatar img-circle" alt="avatar" width="200"
+                             height="auto">
+                    </div>
+                </div>
+
+                <div class="col-md-9 personal-info">
+                    <form class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">First name</label>
+                            <div class="col-lg-8">
+                                <input class="form-control" type="text" value="{{ user.first_name }}" disabled>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">Last name</label>
+                            <div class="col-lg-8">
+                                <input class="form-control" type="text" value="{{ user.last_name }}" disabled>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">Email</label>
+                            <div class="col-lg-8">
+                                <input class="form-control" type="text" value="{{ user.email }}" disabled>
+                            </div>
+                        </div>
+
+                        <br>
+
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">University</label>
+                            <div class="col-lg-8">
+                                <input class="form-control" type="text" value="{{ university }}" disabled>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">Description</label>
+                            <div class="col-lg-8">
+                                <textarea class="form-control" rows="3" id="id_description" name="description"
+                                          disabled>{{ description }}</textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"></label>
+                            <div class="col-md-8">
+                                <a class="btn btn-default" href="{% url 'edit_profile' %}"
+                                   role="button">Change personal details</a>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"></label>
+                            <div class="col-md-8">
+                                <a class="btn btn-default" href="{% url 'edit_password' %}"
+                                   role="button">Change password</a>
+                            </div>
+                        </div>
+
+                    </form>
                 </div>
             </div>
-
-            <div class="col-md-9 personal-info">
-                <form class="form-horizontal" role="form">
-                    <div class="form-group">
-                        <label class="col-lg-3 control-label">First name</label>
-                        <div class="col-lg-8">
-                            <input class="form-control" type="text" value="{{ user.first_name }}" disabled>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-lg-3 control-label">Last name</label>
-                        <div class="col-lg-8">
-                            <input class="form-control" type="text" value="{{ user.last_name }}" disabled>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-lg-3 control-label">Email</label>
-                        <div class="col-lg-8">
-                            <input class="form-control" type="text" value="{{ user.email }}" disabled>
-                        </div>
-                    </div>
-
-                    <br>
-
-                    <div class="form-group">
-                        <label class="col-lg-3 control-label">University</label>
-                        <div class="col-lg-8">
-                            <input class="form-control" type="text" value="{{ university }}" disabled>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-lg-3 control-label">Description</label>
-                        <div class="col-lg-8">
-                            <textarea class="form-control" rows="3" id="id_description" name="description"
-                                      disabled>{{ description }}</textarea>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-md-3 control-label"></label>
-                        <div class="col-md-8">
-                            <a class="btn btn-default" href="{% url 'edit_profile' %}"
-                               role="button">Change personal details</a>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-md-3 control-label"></label>
-                        <div class="col-md-8">
-                            <a class="btn btn-default" href="{% url 'edit_password' %}" role="button">Change password</a>
-                        </div>
-                    </div>
-
-                </form>
-            </div>
         </div>
-    </div>
+    {% endif %}
     <hr>
 
-    Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris
-    condimentum nibh, ut fermentum massa justo sit amet risus.
-    <br>
     Put link to scoreboard here
-
-
 
 {% endblock %}
 
