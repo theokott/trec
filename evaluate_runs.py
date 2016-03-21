@@ -19,12 +19,9 @@ def getScores(qrels_path, rels_path):
 
     file = open("test_output.txt")
     lines=file.readlines()
-    print lines
     MAP_score = lines[6][-7:]
     P10_score = lines[23][-7:]
     P20_score = lines[25][-7:]
-    print MAP_score
-    print P10_score
     file.close()
 
     return (MAP_score, P10_score, P20_score)
