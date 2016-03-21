@@ -19,9 +19,7 @@
                 </div>
             </div>
 
-
             <div class="col-md-9 personal-info">
-
                 <form class="form-horizontal" role="form">
                     <div class="form-group">
                         <label class="col-lg-3 control-label">First name</label>
@@ -64,12 +62,19 @@
                     <div class="form-group">
                         <label class="col-md-3 control-label"></label>
                         <div class="col-md-8">
-                            <a class="btn btn-default" href="{% url 'edit' %}" role="button">Change</a>
+                            <a class="btn btn-default" href="{% url 'edit_profile' %}" role="button">Change personal details</a>
                         </div>
                     </div>
+
+                    <div class="form-group">
+                        <label class="col-md-3 control-label"></label>
+                        <div class="col-md-8">
+                            <a class="btn btn-default" href="{% url 'edit_password' %}" role="button">Change personal details</a>
+                        </div>
+                    </div>
+
                 </form>
             </div>
-
         </div>
     </div>
     <hr>
