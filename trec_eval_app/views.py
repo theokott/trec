@@ -150,7 +150,8 @@ def user_edit_profile(request):
         context_dict['description'] = profile.description
         context_dict['picture'] = profile.picture
 
-    return render(request, 'trec_eval_app/edit-profile.html.html', context_dict)
+    return render(request, 'trec_eval_app/edit-profile.html', context_dict)
+
 
 def user_edit_password(request):
     context_dict = {'request': request}
