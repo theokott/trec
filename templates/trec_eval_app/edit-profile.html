@@ -78,11 +78,11 @@
                                 </div>
                             </div>
 
-                            <input class="form-control" type="password" id="id_password" name="password" hidden="True"
-                                    value="{{ user.password }}">
+                            <input class="form-control" type="password" value="{{ user.password }}"
+                                   id="id_password" name="password" hidden>
 
-                            <input class="form-control" type="password" id="id_username" name="username" hidden="True"
-                                    value="{{ user.username }}">
+                            <input class="form-control" type="text" value="{{ user.username }}"
+                                   id="id_username" name="username" hidden>
 
                             <div class="form-group">
                                 <label class="col-md-3 control-label"></label>
