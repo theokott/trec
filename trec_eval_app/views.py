@@ -165,8 +165,14 @@ def user_edit_profile(request):
         profile_form = UserProfileForm(request.POST, instance=profile)
 
         if all([user_form.is_valid(), profile_form.is_valid()]):
-            user_form.save()
-            profile_form.save()
+
+            user_form.save(commit=False)
+            profile_form.save(commit=False)
+
+            if 'picture' in request.FILES:
+                profile.picture = request.FILES['picture']
+
+            profile.save(commit=False)
             update = True
 
     context_dict['update'] = update
