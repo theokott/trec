@@ -116,11 +116,18 @@ class Run(models.Model):
     P20Score = models.FloatField()
     P20Score.null = True
 
+
     def __unicode__(self):
         return self.name
 
 
+class RunFile(models.Model):
+    name = models.CharField(max_length=128, unique=False)
+    name = "temp"
+    file = models.FileField(upload_to='temp_run')
 
+    def __unicode__(self):
+        return self.name
 
 
 class RunScore(models.Model):
