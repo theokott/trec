@@ -6,9 +6,9 @@ import unittest
 
 from trec_eval_app.models import Track, Task, UserProfile, Run
 
-#				Class TestTrecEvaluator
-#	This class implements the unit testing methodology.
-#	Two test cases are implemented on the populate_trec.py script.
+#                Class TestTrecEvaluator
+#    This class implements the unit testing methodology.
+#    Two test cases are implemented on the populate_trec.py script.
 
 class TestTrecEvaluator(unittest.TestCase):
 
@@ -20,5 +20,5 @@ class TestTrecEvaluator(unittest.TestCase):
 
 
 
-if __name__ == '__main__':
+if __name__ == '__main__':  #This testing script has to be called by console to test the functionalities.
     unittest.main()
