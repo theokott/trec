@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse
-from trec_eval_app.forms import UserForm, UserProfileForm
+from trec_eval_app.forms import UserForm, UserProfileForm, RunUploadForm
 from django.contrib.auth.decorators import login_required
 from trec_eval_app.models import Track, Run
 
@@ -111,6 +111,30 @@ def register(request):
 
 def upload(request):
     context_dict = {'request': request}
+
+    if request.method == 'POST':
+        upload_form = RunUploadForm(data=request.POST)
+
+        if upload_form.is_valid():
+            run = upload_form.save(commit=False)
+
+            if 'file' in request.FILES:
+                run.file = request.FILES['file']
+
+            run.save()
+
+        else:
+            print upload_form.errors
+
+    else:
+        upload_form = RunUploadForm()
+        context_dict['upload_form'] = upload_form
+
+    context_dict['request'] = request
+
+    return render(request, 'trec_eval_app/upload.html', context_dict)
+
+
     return render(request, 'trec_eval_app/upload.html', context_dict)
 
 
