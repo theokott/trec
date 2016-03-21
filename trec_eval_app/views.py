@@ -51,6 +51,11 @@ def user_login(request):
         if user:
             if user.is_active:
                 login(request, user)
+                #only remember if checkbox is ticked
+
+                if not request.POST.get("remember_me"):
+                    request.session.set_expiry(0)
+
                 return HttpResponseRedirect('/trec_eval_app/')
             else:
                 # These next two lines are for showing a red error message if user cant login in
