@@ -7,10 +7,13 @@
 {% block body_block %}
 
     <div class="page-header">
-        <h1>Scoreboard {% if this_track %} for {{this_track}} {%endif%}</h1>
+        <h3>Scoreboard {% if this_track %} for {{this_track}} {%endif%}</h3>
     </div>
+
     <div class="dropdown">
+
         <button class="btn btn-default dropdown-toggle btn-xs" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+
         Select Track
         </button>
         <ul class="dropdown-menu">
@@ -18,18 +21,23 @@
             <li><a href="/trec_eval_app/scoreboard/{{track.slug}}">{{track.name}}</a></li>
             {% endfor %}
         </ul>
+        &nbsp
+        &nbsp
+        &nbsp
+        &nbsp
+        &nbsp
+        Click score type to order by:
     </div>
 
-    <label class="checkbox-inline"><input type="checkbox" value="" id="button1">MAP</label>
-    <label class="checkbox-inline"><input type="checkbox" value="" id="button2">P10</label>
-    <label class="checkbox-inline"><input type="checkbox" value="" id="button3">P20</label>
 
 
     <table id="scoreTable" class="pure-table">
         <thead>
         <tr>
             <th>Name</th>
-            <th>Score </th>
+            <th>MAP Score </th>
+            <th>P10 Score</th>
+            <th>P20 Score</th>
             <th>Description</th>
 
         </tr>
@@ -39,6 +47,8 @@
         <tr>
             <td>{{run.name}}</td>
             <td>{{run.MAPScore}}</td>
+            <td>{{run.P10Score}}</td>
+            <td>{{run.P20Score}}</td>
             <td>{{run.description}}</td>
         </tr>
         {% endfor %}
