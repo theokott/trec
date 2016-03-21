@@ -7,7 +7,7 @@ django.setup()
 
 from django.contrib.auth.models import User
 from trec_eval_app.models import Track, Task, UserProfile, Run
-import datetime
+import evaluate_runs
 
 
 def populate():
@@ -15,7 +15,7 @@ def populate():
                                 desc = "News Retrieval"
     )
 
-    Robust2005Track = add_track(id = "rb05", name = "Robust2005",
+    Robust2005Track = add_track(id = "rb05track", name = "Robust2005",
                                 desc = "News Retrieval"
     )
 
@@ -33,7 +33,7 @@ def populate():
     )
 
 
-    add_task(id = "rb05", desc = "For each topic find all the relevant documents",
+    Robust2005Task = add_task(id = "rb05task", desc = "For each topic find all the relevant documents",
              track = Robust2005Track)
 
     add_task(id = "web05", desc = "Find all the relevant web pages",
@@ -41,9 +41,6 @@ def populate():
 
     add_task(id = "apn", desc = "Find all the relevant news articles",
              track = APNewsTrack)
-
-
-#add_user(username, fName, lName, email, password
 
     ASU = add_user(username = "ASU" , password = "password", fName = "", lName = "", email = "mail@ASU.com")
     add_userProfile(user = ASU, uni = "AS University", desc = "Alpha Team", adminPerm = False)
@@ -60,20 +57,14 @@ def populate():
     RIM = add_user(username = "RIM" , password = "password", fName = "", lName = "", email = "mail@RIM.com")
     add_userProfile(user = RIM, uni = "Royal Insitute of Mayhem", desc = "IRJobs", adminPerm = False)
 
+    add_runs(Robust2005Task)
 
-    # add_run(id = "a", name = "example run", task = microTask, desc = "Run for the task mb1",
-    #         date = datetime.date.today(), automated=False, qType = "t", fbType = Run.feedTypeR)
-
-    # add_run(id = "b", name = "example run2", task = sessTask, desc = "Run for the task s1",
-    #         date = datetime.date.today(), automated=False, qType = "d", fbType = Run.feedTypeP)
-
-    # for tr in Track.objects.all():
-    #     for ta in Task.objects.filter(track = tr):
-    #         for run in Run.objects.filter(task = ta):
-    #             print "- {0} - {1}".format(str(tr), ta.taskID)
-    #             print run.runID + " - " + run.name + " - " + run.description +  " - " + run.queryType + " - " +
-    #                                                                                           run.feedbackType
-    #             print ""
+    for tr in Track.objects.all():
+        for ta in Task.objects.filter(track = tr):
+            for run in Run.objects.filter(task = ta):
+                print "- {0} - {1}".format(str(tr), ta.taskID)
+                print run.runID + " - " + run.name + " - " + run.description +  " - " + run.queryType + " - " + run.feedbackType
+                print ""
 
 
 def add_track(id, name, desc):
@@ -91,8 +82,8 @@ def add_task(id, desc, track):
     return x
 
 
-def add_run(rID, name, task, desc, automated, qType, fbType, MAP, P10, P20):
-    x = Run.objects.get_or_create(runID = rID, task = task, track_id = task.track.trackID)[0]
+def add_run(rID, name, taskArg, desc, automated, qType, fbType, MAP, P10, P20):
+    x = Run.objects.get_or_create(runID = rID, task = taskArg, track = taskArg.track)[0]
     x.description = desc
     x.name = name
     x.isFullyAutomated = automated
@@ -124,6 +115,11 @@ def add_userProfile(user, uni, desc, adminPerm): #, pic)
     x.adminPermission = adminPerm
     x.save()
     return x
+
+def add_runs(task):
+    for i in os.listdir("./evaluator/participants/robust"):
+        scores =  evaluate_runs.getScores("./evaluator/data/robust/aq.trec2005.qrels", "./evaluator/participants/robust/"+i)
+        add_run(i, i[6:], task, "Placeholder description", False, "d", Run.feedTypeP, float(scores[0]), float(scores[1]), float(scores[2]))
 
 # Start execution here!
 if __name__ == '__main__':
