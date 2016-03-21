@@ -11,6 +11,7 @@ def getScores(qrels_path, rels_path):
 	#Runs trec_eval as a Bash command and then saves the output to the file test_output.txt
     os.system(
 		"./evaluator/trec_eval.9.0/trec_eval " + qrels_path + " " + rels_path + " > test_output.txt"
+		#"./evaluator/trec_eval.9.0/trec_eval ./evaluator/data/robust/aq.trec2005.qrels ./media/temp_run/name.txt > test_output.txt"
 		)
 
 
@@ -18,9 +19,12 @@ def getScores(qrels_path, rels_path):
 
     file = open("test_output.txt")
     lines=file.readlines()
+    print lines
     MAP_score = lines[6][-7:]
     P10_score = lines[23][-7:]
     P20_score = lines[25][-7:]
+    print MAP_score
+    print P10_score
     file.close()
 
     return (MAP_score, P10_score, P20_score)

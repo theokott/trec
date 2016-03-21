@@ -3,7 +3,9 @@ from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse
 from trec_eval_app.forms import UserForm, UserProfileForm, UploadRunForm
 from django.contrib.auth.decorators import login_required
-from trec_eval_app.models import Track, Run
+from trec_eval_app.models import Track, Task, UserProfile, Run
+from evaluate_runs import getScores
+from populate_trec import add_run
 
 # Creates html responses based the function called
 # Each function contains a context_dict which contains variables to be used in the HTML template that is referenced
@@ -128,6 +130,11 @@ def handle_uploaded_file(f):
     with open('media/temp_run/name.txt', 'wb+') as destination:
         for chunk in f.chunks():
             destination.write(chunk)
+    scores = getScores('./evaluator/data/robust/aq.trec2005.qrels', './media/temp_run/name.txt')
+    #(rID, name, taskArg, desc, automated, qType, fbType, MAP, P10, P20)
+    x = Track.objects.get_or_create(trackID = "rb05track")[0]
+    task = Task.objects.get_or_create(track = x, taskID = "rb05task")[0]
+    add_run("testID", "testName", task, "placeholder", False, "d", Run.feedTypeP, float(scores[0]), float(scores[1]), float(scores[2]))
 
 
 @login_required
