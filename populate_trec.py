@@ -57,6 +57,15 @@ def populate():
     RIM = add_user(username = "RIM" , password = "password", fName = "", lName = "", email = "mail@RIM.com")
     add_userProfile(user = RIM, uni = "Royal Insitute of Mayhem", desc = "IRJobs", adminPerm = False)
 
+    jill = add_user(username = "jill" , password = "jill", fName = "Jill", lName = "Jillson", email = "jill@jill.com")
+    add_userProfile(user = jill, uni = "University of Glasgow", desc = "I am Jill", adminPerm = False)
+
+    bob = add_user(username = "bob" , password = "bob", fName = "Robert", lName = "Robertson", email = "rob@rob.com")
+    add_userProfile(user = bob, uni = "University of Robert", desc = "This is Bob", adminPerm = False)
+
+    jen = add_user(username = "jen" , password = "jen", fName = "Jennifer", lName = "Jenison", email = "jen@jen.com")
+    add_userProfile(user = jen, uni = "Jennifer's University", desc = "I am the one known as 'Jen'", adminPerm = True)
+
     add_runs(Robust2005Task)
 
     for tr in Track.objects.all():
@@ -117,6 +126,7 @@ def add_userProfile(user, uni, desc, adminPerm): #, pic)
     return x
 
 def add_runs(task):
+    print os.listdir("./evaluator/participants/robust")
     for i in os.listdir("./evaluator/participants/robust"):
         scores =  evaluate_runs.getScores("./evaluator/data/robust/aq.trec2005.qrels", "./evaluator/participants/robust/"+i)
         add_run(i, i[6:], task, "Placeholder description", False, "d", Run.feedTypeP, float(scores[0]), float(scores[1]), float(scores[2]))
