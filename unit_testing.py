@@ -12,6 +12,9 @@ class TestTrecEvaluator(unittest.TestCase):
     def test_add_track(self):
         self.assertEqual((add_track(0,"testTrack1","First unit test: this Track tests the method add_track")).name,"testTrack1")
 
+    def test_add_user(self):
+        self.assertEqual((add_user("testUser1", "test", "user", "test@test.com", "SecondUnitTest")).username,"testUser1")
+
 
 
 if __name__ == '__main__':
