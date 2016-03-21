@@ -155,4 +155,20 @@ def user_edit_profile(request):
 
 def user_edit_password(request):
     context_dict = {'request': request}
+    context_dict['error_message'] = None
+    user = request.user
+    profile = user.userprofile
+
+    if request.method == 'POST':
+        user_form = UserForm(request.POST, instance=user)
+        profile_form = UserProfileForm(request.POST, instance=profile)
+
+        if all([user_form.is_valid(), profile_form.is_valid()]):
+            user_form.save()
+            profile_form.save()
+            return HttpResponseRedirect('trec_eval_app/user.html')
+    else:
+        context_dict['university'] = profile.university
+        context_dict['description'] = profile.description
+        context_dict['picture'] = profile.picture
     return render(request, 'trec_eval_app/edit-password.html', context_dict)
