@@ -142,8 +142,15 @@ def user_edit_profile(request):
         profile_form = UserProfileForm(request.POST, instance=profile)
 
         if all([user_form.is_valid(), profile_form.is_valid()]):
-            user_form.save()
-            profile_form.save()
+
+            profile.description = profile_form.description
+            profile.university = profile_form.university
+
+            if 'picture' in request.FILES:
+                profile.picture = picture = request.FILES['picture']
+
+            user.save()
+            profile.save()
             return HttpResponseRedirect('trec_eval_app/user.html')
     else:
         context_dict['university'] = profile.university
