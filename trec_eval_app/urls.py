@@ -12,6 +12,7 @@ urlpatterns = patterns('',
                        url(r'register/$', views.register, name='register'),
                        url(r'upload/$', views.upload, name='upload'),
                        url(r'user/$', views.user_profile, name='user'),
-                       url(r'user/edit/$', views.user_edit, name='edit'),
+                       url(r'user/edit-profile/$', views.user_edit, name='edit_profile'),
+                       url(r'user/edit-password', views.user_edit_password, name='edit_password'),
                        url(r'^scoreboard/(?P<track_slug>[\w\-]+)/$', views.scoreboard, name='scoreboard'),
                        )

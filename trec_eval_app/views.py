@@ -130,7 +130,8 @@ def user_profile(request):
     return render(request, 'trec_eval_app/user.html', context_dict)
 
 
-def user_edit(request):
+@login_required
+def user_edit_profile(request):
     context_dict = {'request': request}
     context_dict['error_message'] = None
     user = request.user
@@ -143,14 +144,14 @@ def user_edit(request):
         if all([user_form.is_valid(), profile_form.is_valid()]):
             user_form.save()
             profile_form.save()
-            print user_form
-            print profile_form
             return HttpResponseRedirect('trec_eval_app/user.html')
     else:
         context_dict['university'] = profile.university
         context_dict['description'] = profile.description
         context_dict['picture'] = profile.picture
 
-    return render(request, 'trec_eval_app/edit.html', context_dict)
+    return render(request, 'trec_eval_app/edit-profile.html.html', context_dict)
 
-
+def user_edit_password(request):
+    context_dict = {'request': request}
+    return render(request, 'trec_eval_app/edit-password.html', context_dict)
