@@ -136,12 +136,16 @@ def user_edit_profile(request):
     context_dict['error_message'] = None
     user = request.user
     profile = user.userprofile
+    update = False
 
     if request.method == 'POST':
         user_form = UserForm(request.POST, instance=user)
         profile_form = UserProfileForm(request.POST, instance=profile)
 
         if all([user_form.is_valid(), profile_form.is_valid()]):
+
+            user.first_name = user_form.first_name
+            user.last_name = user_form.last_name
 
             profile.description = profile_form.description
             profile.university = profile_form.university
@@ -151,7 +155,7 @@ def user_edit_profile(request):
 
             user.save()
             profile.save()
-            return HttpResponseRedirect('trec_eval_app/user.html')
+            update = True
     else:
         context_dict['university'] = profile.university
         context_dict['description'] = profile.description
