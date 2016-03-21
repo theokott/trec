@@ -120,7 +120,11 @@ class Run(models.Model):
         return self.name
 
 
-
+class UploadedRun(models.Model):
+    file = models.FileField(upload_to="/temp_run/")
+    name = models.CharField(max_length=128, unique=False)
+    def __unicode__(self):
+        return self.name
 
 
 class RunScore(models.Model):

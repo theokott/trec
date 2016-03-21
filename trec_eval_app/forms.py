@@ -1,8 +1,7 @@
 __author__ = '2131905K'
-import time
 from django import forms
 from django.contrib.auth.models import User
-from trec_eval_app.models import Track, Task, Run, UserProfile
+from trec_eval_app.models import Track, Task, Run, UserProfile, UploadedRun
 
 
 class UserForm(forms.ModelForm):
@@ -17,3 +16,8 @@ class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
         fields = ("university", "description", 'picture')
+
+class UploadRunForm(forms.ModelForm):
+    class Meta:
+        model = UploadedRun
+        fields = ("file",)
