@@ -109,9 +109,12 @@ class Run(models.Model):
     isFullyAutomated = models.BooleanField(default=False)
     queryType = models.CharField(max_length=2, choices=queryTypeChoices, default=qtTitle)
     feedbackType = models.CharField(max_length=1, choices=feedbackTypeChoices, default=feedTypeN)
-    MAPScore = models.DecimalField(max_digits=5, decimal_places=4)
-    P10Score = models.DecimalField(max_digits=5, decimal_places=4)
-    P20Score = models.DecimalField(max_digits=5, decimal_places=4)
+    MAPScore = models.FloatField()
+    MAPScore.null = True
+    P10Score = models.FloatField()
+    P10Score.null = True
+    P20Score = models.FloatField()
+    P20Score.null = True
 
     def __unicode__(self):
         return self.name
