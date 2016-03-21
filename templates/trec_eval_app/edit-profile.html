@@ -8,13 +8,13 @@
 
     {% if user.is_authenticated %}
 
+        <div class="page-header">
+            <h1>User profile: {{ user.username }}</h1>
+        </div>
         {% if update  %}
             Your profile has been updated!
             <a href="{% url 'user' %}">Return to profile page</a><br />
         {% else %}
-            <div class="page-header">
-                <h1>User profile: {{ user.username }}</h1>
-            </div>
 
             <div class="container">
 
@@ -41,28 +41,32 @@
                             <div class="form-group">
                                 <label class="col-lg-3 control-label">First name</label>
                                 <div class="col-lg-8">
-                                    <input class="form-control" type="text" value="{{ user.first_name }}">
+                                    <input class="form-control" type="text" value="{{ user.first_name }}"
+                                           id="id_first_name" name="first_name">
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-lg-3 control-label">Last name</label>
                                 <div class="col-lg-8">
-                                    <input class="form-control" type="text" value="{{ user.last_name }}">
+                                    <input class="form-control" type="text" value="{{ user.last_name }}"
+                                           id="id_last_name" name="last_name">
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-lg-3 control-label">Email</label>
                                 <div class="col-lg-8">
-                                    <input class="form-control" type="text" value="{{ user.email }}">
+                                    <input class="form-control" type="text" value="{{ user.email }}" id="id_email"
+                                           name="email">
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-lg-3 control-label">University</label>
                                 <div class="col-lg-8">
-                                    <input class="form-control" type="text" value="{{ university }}">
+                                    <input class="form-control" type="text" value="{{ university }}" id="id_university"
+                                           name="university">
                                 </div>
                             </div>
 
@@ -74,6 +78,12 @@
                                 </div>
                             </div>
 
+                            <input class="form-control" type="password" id="id_password" name="password" hidden="True"
+                                    value="{{ user.password }}">
+
+                            <input class="form-control" type="password" id="id_username" name="username" hidden="True"
+                                    value="{{ user.username }}">
+
                             <div class="form-group">
                                 <label class="col-md-3 control-label"></label>
                                 <div class="col-md-8">
@@ -81,14 +91,12 @@
                                 </div>
                             </div>
 
-                            <!--
                             <div class="form-group">
                                 <label class="col-md-3 control-label"></label>
                                 <div class="col-md-8">
                                     <a class="btn btn-default" href="{% url 'user' %}" role="button">Cancel</a>
                                 </div>
                             </div>
-                            -->
 
                         </div>
                     </form>
