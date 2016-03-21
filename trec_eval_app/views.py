@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse
-from trec_eval_app.forms import UserForm, UserProfileForm
+from trec_eval_app.forms import UserForm, UserProfileForm, UploadRunForm
 from django.contrib.auth.decorators import login_required
 from trec_eval_app.models import Track, Run
 
@@ -110,8 +110,19 @@ def register(request):
 
 
 def upload(request):
-    context_dict = {'request': request}
-    return render(request, 'trec_eval_app/upload.html', context_dict)
+    if request.method == 'POST':
+        form = UploadRunForm(request.POST, request.FILES)
+        #if form.is_valid():
+        handle_uploaded_file(request.FILES['run'])
+        return HttpResponseRedirect('')
+    else:
+        form = UploadRunForm()
+    return render(request, 'trec_eval_app/upload.html', {'form': form})
+
+def handle_uploaded_file(f):
+    with open('media/temp_run/name.txt', 'wb+') as destination:
+        for chunk in f.chunks():
+            destination.write(chunk)
 
 
 @login_required
