@@ -143,7 +143,9 @@ def user_edit(request):
         if all([user_form.is_valid(), profile_form.is_valid()]):
             user_form.save()
             profile_form.save()
-            return render(request, 'trec_eval_app/user.html', context_dict)
+            print user_form
+            print profile_form
+            return HttpResponseRedirect('trec_eval_app/user.html')
     else:
         context_dict['university'] = profile.university
         context_dict['description'] = profile.description
