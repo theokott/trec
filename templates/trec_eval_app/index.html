@@ -6,7 +6,7 @@
 
 {% block body_block %}
     <div class="page-header">
-        <h1>Welcome{{ user.username }}!</h1>
+        <h1>Welcome {{ user.username }}!</h1>
     </div>
     {% if user.is_authenticated %}
         <a class="btn btn-default" href="{% url 'upload' %}" role="button">Upload a new run</a>
