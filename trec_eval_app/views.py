@@ -54,7 +54,7 @@ def user_login(request):
             if user.is_active:
                 login(request, user)
                 #only remember if checkbox is ticked
-
+                #if checkbox is not ticked, set session expiry to 0
                 if not request.POST.get("remember_me"):
                     request.session.set_expiry(0)
 
@@ -203,4 +203,3 @@ def user_edit_password(request):
     context_dict['picture'] = profile.picture
 
     return render(request, 'trec_eval_app/edit-password.html', context_dict)
-
