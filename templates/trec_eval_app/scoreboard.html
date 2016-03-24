@@ -7,9 +7,11 @@
 {% block body_block %}
 
     <div class="page-header">
+        <!titles the scoreboard correctly depending on what track scores are being viewed for>
         <h3>Scoreboard {% if this_track %} for {{this_track}} {%endif%}</h3>
     </div>
 
+    <!dropdown button for selecting track to view scores for>
     <div class="dropdown">
 
         <button class="btn btn-default dropdown-toggle btn-xs" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -17,10 +19,12 @@
         Select Track
         </button>
         <ul class="dropdown-menu">
+            <!loop through tracks to fill dropdown menu>
             {% for track in tracks %}
             <li><a href="/trec_eval_app/scoreboard/{{track.slug}}">{{track.name}}</a></li>
             {% endfor %}
         </ul>
+        <!spaces for formatting>
         &nbsp
         &nbsp
         &nbsp
@@ -30,7 +34,7 @@
     </div>
 
 
-
+    <!creates a table, fills it with Name, MAP score, P10 Score, P20 Score and Description>
     <table id="scoreTable" class="pure-table">
         <thead>
         <tr>
@@ -43,6 +47,7 @@
         </tr>
         </thead>
         <tbody>
+        <!loops through runs and gets different names, descriptions and different scores for each>
         {% for run in runs %}
         <tr>
             <td>{{run.name}}</td>
@@ -55,7 +60,7 @@
 
         </tbody>
     </table>
-
+    <!table sorting algorithm>
     <script>
         $(document).ready(function()
         {
@@ -69,4 +74,3 @@
 
     </script>
 {% endblock %}
-
