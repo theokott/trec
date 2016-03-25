@@ -93,6 +93,7 @@ def register(request):
             profile = profile_form.save(commit=False)
             profile.user = user
 
+            # If there is a picture in the POST data save that picture to user profile
             if 'picture' in request.FILES:
                 profile.picture = request.FILES['picture']
 
@@ -119,22 +120,23 @@ def register(request):
 def upload(request):
     if request.method == 'POST':
         form = UploadRunForm(request.POST, request.FILES)
-        #if form.is_valid():
         handle_uploaded_file(request.FILES['run'])
         return HttpResponseRedirect('')
     else:
         form = UploadRunForm()
     return render(request, 'trec_eval_app/upload.html', {'form': form})
 
+
 def handle_uploaded_file(f):
     with open('media/temp_run/name.txt', 'wb+') as destination:
         for chunk in f.chunks():
             destination.write(chunk)
     scores = getScores('./evaluator/data/robust/aq.trec2005.qrels', './media/temp_run/name.txt')
-    #(rID, name, taskArg, desc, automated, qType, fbType, MAP, P10, P20)
-    x = Track.objects.get_or_create(trackID = "rb05track")[0]
-    task = Task.objects.get_or_create(track = x, taskID = "rb05task")[0]
-    add_run("testID", "testName", task, "placeholder", False, "d", Run.feedTypeP, float(scores[0]), float(scores[1]), float(scores[2]))
+    # (rID, name, taskArg, desc, automated, qType, fbType, MAP, P10, P20)
+    x = Track.objects.get_or_create(trackID="rb05track")[0]
+    task = Task.objects.get_or_create(track=x, taskID="rb05task")[0]
+    add_run("testID", "testName", task, "placeholder", False, "d", Run.feedTypeP,
+            float(scores[0]), float(scores[1]), float(scores[2]))
 
 
 @login_required
@@ -175,6 +177,7 @@ def user_edit_profile(request):
             profile.save()
             update = True
 
+    # If no POST data, send the following information to the context dictionary
     context_dict['update'] = update
     context_dict['university'] = profile.university
     context_dict['description'] = profile.description
