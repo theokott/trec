@@ -13,10 +13,20 @@ from trec_eval_app.models import Track, Task, UserProfile, Run
 class TestTrecEvaluator(unittest.TestCase):
 
     def test_add_track(self):  #Test testing the insertion of a track.
-        self.assertEqual((add_track(0,"testTrack1","First unit test: this Track tests the method add_track")).name,"testTrack1")
+        testTrack = add_track(0,"testTrack1","First unit test: this Track tests the method add_track")  #All the attributes of the new track are checked.
+        self.assertEqual(testTrack.name,"testTrack1")
+        self.assertEqual(testTrack.desc,"First unit test: this Track tests the method add_track")
+        
 
     def test_add_user(self):   #Test testing the insertion of a user.
-        self.assertEqual((add_user("testUser1", "test", "user", "test@test.com", "SecondUnitTest")).username,"testUser1")
+        testUser = add_user("testUser1", "test", "user", "test@test.com", "SecondUnitTest")  #All the attributes of the new user are checked.
+        self.assertEqual(testUser.username,"testUser1")
+        self.assertEqual(testUser.first_name,"test")
+        self.assertEqual(testUser.last_name,"user")
+        self.assertEqual(testUser.email,"test@test.com")
+        self.assertEqual(testUser.password,"SecondUnitTest")
+
+        
 
 
 
